@@ -1,5 +1,4 @@
 next:
-- setup linting and prettier
 - setup jest/mocha as testing framework and create simple test for routes
 - remove not used libraries
 
