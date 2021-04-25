@@ -1,7 +1,7 @@
 import fp from 'fastify-plugin';
 
 export interface SupportPluginOptions {
-  // Specify Support plugin options here
+  sample?: string;
 }
 
 // The use of fastify-plugin is required to be able

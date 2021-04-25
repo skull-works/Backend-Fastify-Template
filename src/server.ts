@@ -1,8 +1,9 @@
-import fastify from 'fastify';
 import * as closeWithGrace from 'close-with-grace';
+import * as dotenv from 'dotenv';
+import fastify from 'fastify';
 import AppService from './app';
 
-require('dotenv').confg;
+dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 const APP_ENV = process.env.APP_ENV || 'Default';
@@ -44,7 +45,6 @@ server.addHook('onClose', async (_instance, done) => {
 
 server.listen(PORT, (err, _address) => {
   if (err) {
-    server.log.info('hey');
     server.log.error(err);
     process.exit(1);
   }

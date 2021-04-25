@@ -1,5 +1,5 @@
-import { test } from 'tap';
 import Fastify from 'fastify';
+import { test } from 'tap';
 import Support from '../../src/plugins/support';
 
 test('support works standalone', async (t) => {
