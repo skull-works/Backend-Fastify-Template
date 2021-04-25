@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build:ts": "tsc",
-    "start": "npm run build:ts && node dist/server.js",
+    "start": "npm run build:ts && node dist/src/server.js",
     "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"Fastify\" -c \"green.bold,cyan.bold\"  \"env-cmd ./config/development.env nodemon\"",
     "test": "npm run test:e2e && npm run test:unit",
     "test:e2e": "jest --config ./test/jest-e2e.json --verbose --runInBand --passWithNoTests --testTimeout=60000 --forceExit",
@@ -23,9 +23,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "close-with-grace": "^1.1.0",
     "fastify": "^3.0.0",
     "fastify-autoload": "^3.3.1",
-    "fastify-cli": "^2.9.1",
     "fastify-plugin": "^3.0.0",
     "fastify-sensible": "^3.1.0",
     "pino-pretty": "^4.7.1"
