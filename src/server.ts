@@ -6,9 +6,17 @@ const server = fastify({
   logger: {
     prettyPrint: {
       colorize: true,
-      ignore: 'hostname,pid',
+      ignore: 'hostname,pid,reqId',
       translateTime: 'SYS:standard',
       timestampKey: 'time',
+    },
+    serializers: {
+      req (request) {
+        return {
+          method: request.method,
+          url: request.url,
+        }
+      }
     }
   }
 })
@@ -31,8 +39,8 @@ server.addHook('onClose', async (_instance, done) => {
 
 server.listen(3000, (err, address) => {
   if (err) {
+    server.log.info('hey');
     server.log.error(err)
     process.exit(1)
   }
-  server.log.info(`Server listening at ${address}`)
 })

@@ -1,5 +1,5 @@
 {
-  "name": "Example-2-Fastify-CLI",
+  "name": "Fastify-Backend-Template",
   "version": "1.0.0",
   "description": "",
   "main": "app.ts",
@@ -9,7 +9,7 @@
   "scripts": {
     "build:ts": "tsc",
     "start": "npm run build:ts && node dist/server.js",
-    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"App\" -c \"green.bold,cyan.bold\"  \"nodemon\"",
+    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"Fastify\" -c \"green.bold,cyan.bold\"  \"nodemon\"",
     "test": "npm run build:ts && tsc -p test/tsconfig.test.json && tap test/**/*.test.ts"
   },
   "keywords": [],
