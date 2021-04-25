@@ -3,7 +3,8 @@
     "compilerOptions": {
         "baseUrl": "./",
         "declaration": true,
-        "outDir": "dist"
+        "outDir": "dist",
+        "target": "es6"
     },
-    "include": ["src/**/*.ts"]
+    "include": ["src/**/*.ts", "test/**/*.ts"]
 }
