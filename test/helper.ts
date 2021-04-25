@@ -1,10 +1,11 @@
 // This file contains code that we reuse between our tests.
-import Fastify from 'fastify';
+import Fastify, { FastifyInstance, FastifyLoggerInstance } from 'fastify';
 import fp from 'fastify-plugin';
-import * as tap from 'tap';
+import { IncomingMessage, Server, ServerResponse } from 'node:http';
 import App from '../src/app';
 
-export type Test = typeof tap['Test']['prototype'];
+
+let app: FastifyInstance<Server, IncomingMessage, ServerResponse, FastifyLoggerInstance>;
 
 // Fill in this config with all the configurations
 // needed for testing the application
@@ -13,8 +14,8 @@ async function config() {
 }
 
 // Automatically build and tear down our instance
-async function build(t: Test) {
-  const app = Fastify();
+async function build() {
+  app = Fastify();
 
   // fastify-plugin ensures that all decorators
   // are exposed for testing purposes, this is
@@ -23,10 +24,12 @@ async function build(t: Test) {
 
   await app.ready();
 
-  // Tear down our app after we are done
-  t.tearDown(() => void app.close());
-
   return app;
 }
 
-export { config, build };
+const tearDownSetup = async () => {
+  await app.close();
+};
+
+
+export { config, build, tearDownSetup };
