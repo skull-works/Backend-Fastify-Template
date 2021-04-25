@@ -1,14 +1,13 @@
 import { FastifyInstance, FastifyLoggerInstance } from 'fastify';
-import { Server, IncomingMessage, ServerResponse } from 'node:http';
+import { IncomingMessage, Server, ServerResponse } from 'node:http';
 import { build, tearDownSetup } from '../helper';
-
 
 describe('Sample Tests', () => {
   let app: FastifyInstance<Server, IncomingMessage, ServerResponse, FastifyLoggerInstance>;
 
   beforeAll(async () => {
     app = await build();
-  })
+  });
 
   afterAll(async () => {
     await tearDownSetup();
@@ -20,8 +19,8 @@ describe('Sample Tests', () => {
         method: 'GET',
         url: '/hey',
       });
-    
+
       expect(res.payload).toEqual('Hello World');
     });
-  })
-})
+  });
+});

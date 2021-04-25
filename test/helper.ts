@@ -4,7 +4,6 @@ import fp from 'fastify-plugin';
 import { IncomingMessage, Server, ServerResponse } from 'node:http';
 import App from '../src/app';
 
-
 let app: FastifyInstance<Server, IncomingMessage, ServerResponse, FastifyLoggerInstance>;
 
 // Fill in this config with all the configurations
@@ -30,6 +29,5 @@ async function build() {
 const tearDownSetup = async () => {
   await app.close();
 };
-
 
 export { config, build, tearDownSetup };
