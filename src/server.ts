@@ -2,6 +2,11 @@ import fastify from 'fastify'
 import * as closeWithGrace from 'close-with-grace';
 import AppService from './app';
 
+require('dotenv').confg;
+
+const PORT = process.env.PORT || 3000;
+const APP_ENV = process.env.APP_ENV || 'Default';
+
 const server = fastify({
   logger: {
     prettyPrint: {
@@ -37,10 +42,11 @@ server.addHook('onClose', async (_instance, done) => {
   done()
 })
 
-server.listen(3000, (err, address) => {
+server.listen(PORT, (err, _address) => {
   if (err) {
     server.log.info('hey');
     server.log.error(err)
     process.exit(1)
   }
+  server.log.info(`App envirnoment running in ${APP_ENV} mode`);
 })
