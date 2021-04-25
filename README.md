@@ -6,10 +6,10 @@ This is a template backend application using fastify as the core framework
 
 ### Teck stack used
 
-- `Typescript as the language`
-- `Fastify as core backend framework`
-- `Graphql as API`
-- `DynamoDB using Dynamoose`
+- `Typescript` as the language
+- `Fastify` as core backend framework
+- `Graphql` as API
+- `DynamoDB` using Dynamoose
 
 ### commands
 
