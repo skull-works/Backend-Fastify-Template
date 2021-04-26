@@ -1,6 +1,7 @@
 import { FastifyPluginAsync } from 'fastify';
 import AutoLoad, { AutoloadPluginOptions } from 'fastify-autoload';
 import { join } from 'path';
+import HeadRegistrar from './graphql/head.registrar';
 
 export type AppOptions = {
   // Place your custom options for app below here.
@@ -19,11 +20,8 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
     options: opts,
   });
 
-  // This loads all plugins defined in graphql
-  void fastify.register(AutoLoad, {
-    dir: join(__dirname, 'graphql'),
-    options: opts,
-  });
+  // loads the head registrar for graphql modules
+  fastify.register(HeadRegistrar);
 };
 
 export default app;

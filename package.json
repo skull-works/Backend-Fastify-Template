@@ -9,7 +9,7 @@
   "scripts": {
     "build:ts": "tsc",
     "start": "npm run build:ts && node dist/src/server.js",
-    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"Fastify\" -c \"green.bold,cyan.bold\"  \"env-cmd ./config/development.env nodemon\"",
+    "watch": "tsc && concurrently -k -p \"[{name}]\" -n \"Fastify\" -c \"green.bold,cyan.bold\"  \"env-cmd ./config/development.env nodemon\"",
     "test": "npm run test:e2e && npm run test:unit",
     "test:e2e": "jest --config ./test/jest-e2e.json --verbose --runInBand --passWithNoTests --testTimeout=60000 --forceExit",
     "test:unit": "jest --config ./test/jest-unit.json --verbose --runInBand --passWithNoTests --testTimeout=60000 --forceExit",
