@@ -6,21 +6,19 @@ import DummyModule from './dummy/dummy.module';
 const publicEndpoint = process.env.PUBLIC_ENDPOINT || 'public';
 
 interface RegistrarOptions {
-    sample?: string;
+  sample?: string;
 }
 
 const publicRegistrar: FastifyPluginAsync<RegistrarOptions> = async (fastify, opts): Promise<void> => {
+  // load plugins under graphql folder
+  fastify.register(RegisterResolvers);
 
-    // load plugins under graphql folder
-    fastify.register(RegisterResolvers);
+  // initialize graphql instance
+  fastify.register(mercurius, {
+    prefix: publicEndpoint,
+  });
 
-    // initialize graphql instance
-    fastify.register(mercurius, {
-        prefix: publicEndpoint
-    });
-
-    fastify.register(DummyModule);
-    
-}
+  fastify.register(DummyModule);
+};
 
 export default publicRegistrar;

@@ -1,33 +1,30 @@
-import { Server, IncomingMessage, ServerResponse } from 'node:http';
 import { FastifyInstance, FastifyLoggerInstance } from 'fastify';
 import fp from 'fastify-plugin';
+import { IncomingMessage, Server, ServerResponse } from 'node:http';
 
 interface PluginOptions {
   sample?: string;
 }
 
 interface RegisterResolverParams {
-  fastify: FastifyInstance<Server, IncomingMessage, ServerResponse, FastifyLoggerInstance>
+  fastify: FastifyInstance<Server, IncomingMessage, ServerResponse, FastifyLoggerInstance>;
   schema: string;
-  resolvers: any; 
+  resolvers: any;
 }
 
-// The use of fastify-plugin is required to be able
-// to export the decorators to the outer scope
 export default fp<PluginOptions>(async (fastify, opts) => {
-
   fastify.decorate('registerResolvers', (inputs: RegisterResolverParams) => {
+    // tslint:disable
     const { fastify, schema, resolvers } = inputs;
-    fastify.register(async (fastify) => {
-        if (fastify.graphql) {
-            fastify.graphql.extendSchema(schema)
-            fastify.graphql.defineResolvers(resolvers)
-        }
-    })
+    fastify.register(async (app) => {
+      if (app.graphql) {
+        app.graphql.extendSchema(schema);
+        app.graphql.defineResolvers(resolvers);
+      }
+    });
   });
 });
 
-// When using .decorate you have to specify added properties for Typescript
 declare module 'fastify' {
   export interface FastifyInstance {
     registerResolvers(inputs: RegisterResolverParams): void;
