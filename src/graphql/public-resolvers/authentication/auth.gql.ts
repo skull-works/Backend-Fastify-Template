@@ -1,10 +1,9 @@
 import { gql } from 'mercurius-codegen';
 
-
 const AuthSchema = gql`
   input SignInInput {
-      user: String!
-      password: String!
+    user: String!
+    password: String!
   }
 
   extend type Mutation {
