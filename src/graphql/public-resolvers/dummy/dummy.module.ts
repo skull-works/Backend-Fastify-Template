@@ -6,7 +6,7 @@ const DummyModule: FastifyPluginAsync = async (fastify, opts): Promise<void> => 
   fastify.registerResolvers({
     fastify,
     schema: DummySchema,
-    resolvers: DummyResolvers,
+    resolvers: DummyResolvers(fastify),
   });
 };
 

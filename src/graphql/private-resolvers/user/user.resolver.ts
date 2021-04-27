@@ -1,12 +1,17 @@
-const add = async (_: unknown, { x, y }: { x: number; y: number }): Promise<number> => x + y;
+import { Instance } from '../../interface/interface';
 
-const hiMarco = async (_: unknown): Promise<string> => 'Hi Marco';
+const UserResolver = (fastify: Instance) => {
+  const Query = {
 
-const UserResolver = {
-  Query: {
-    add,
-    hiMarco,
-  },
+    hiMarco: async (_: unknown): Promise<string> => {
+      fastify.log.info('Running hiMarco');
+      return 'Hi Marco'
+    }
+    
+  }
+
+  return { Query };
+  
 };
 
 export default UserResolver;

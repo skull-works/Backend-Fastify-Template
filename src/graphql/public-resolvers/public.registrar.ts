@@ -2,6 +2,7 @@ import { FastifyPluginAsync } from 'fastify';
 import mercurius from 'mercurius';
 import RegisterResolvers from '../plugins/register-resolvers.decor';
 import DummyModule from './dummy/dummy.module';
+import AuthModule from './authentication/auth.module';
 
 const publicEndpoint = process.env.PUBLIC_ENDPOINT || 'public';
 
@@ -16,9 +17,12 @@ const publicRegistrar: FastifyPluginAsync<RegistrarOptions> = async (fastify, op
   // initialize graphql instance
   fastify.register(mercurius, {
     prefix: publicEndpoint,
+    defineMutation: true
   });
 
+  // register modules
   fastify.register(DummyModule);
+  fastify.register(AuthModule);
 };
 
 export default publicRegistrar;

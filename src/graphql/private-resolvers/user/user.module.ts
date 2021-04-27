@@ -6,7 +6,7 @@ const UserModule: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.registerResolvers({
     fastify,
     schema: UserSchema,
-    resolvers: UserResolver,
+    resolvers: UserResolver(fastify),
   });
 };
 

@@ -1,7 +1,7 @@
 import { FastifyPluginAsync } from 'fastify';
 import mercurius from 'mercurius';
 import RegisterResolvers from '../plugins/register-resolvers.decor';
-import UserResolver from './user/user.module';
+import UserModule from './user/user.module';
 
 const privateEndpoint = process.env.PRIVATE_ENDPOINT || 'private';
 
@@ -21,10 +21,13 @@ const privateRegistrar: FastifyPluginAsync<RegistrarOptions> = async (fastify, o
   // middlewares
   fastify.addHook('preParsing', async (req, res) => {
     fastify.log.info('Authentication Checking');
+    const token = req.headers.authorization?.split(' ')[1];
+    if (token !== 'SampleToken123') 
+      res.status(403).send('Not authorized');
   });
 
   // register resolvers
-  fastify.register(UserResolver);
+  fastify.register(UserModule);
 };
 
 export default privateRegistrar;
