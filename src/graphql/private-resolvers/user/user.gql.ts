@@ -3,9 +3,9 @@ import { gql } from 'mercurius-codegen';
 const UserSchema = gql`
   extend type Query {
     """
-    Hi Marco
+    Method that returns greeting to user
     """
-    hiMarco: String
+    hiUser: String
   }
 `;
 
