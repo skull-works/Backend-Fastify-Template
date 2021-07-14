@@ -7,8 +7,10 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 const APP_ENV = process.env.APP_ENV || 'Default';
+const IS_HEADERS = process.env.IS_HEADERS ? process.env.IS_HEADERS === 'true' : false;
 
 const server = fastify({
+  connectionTimeout: 10000,
   logger: {
     prettyPrint: {
       colorize: true,
@@ -18,10 +20,14 @@ const server = fastify({
     },
     serializers: {
       req(request) {
-        return {
+        let requestDetails: any = {
           method: request.method,
           url: request.url,
         };
+
+        if (IS_HEADERS) requestDetails['headers'] = request.headers
+        
+        return requestDetails;
       },
     },
   },
