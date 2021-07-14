@@ -1,12 +1,12 @@
 import { FastifyPluginAsync } from 'fastify';
-import DummySchema from './dummy.gql';
-import DummyResolvers from './dummy.resolver';
+import HealthSchema from './health.gql';
+import HealthResolvers from './health.resolver';
 
 const DummyModule: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.registerResolvers({
     fastify,
-    schema: DummySchema,
-    resolvers: DummyResolvers(fastify),
+    schema: HealthSchema,
+    resolvers: HealthResolvers(fastify),
   });
 };
 

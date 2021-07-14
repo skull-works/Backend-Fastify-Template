@@ -2,7 +2,7 @@ import { FastifyPluginAsync } from 'fastify';
 import mercurius from 'mercurius';
 import RegisterResolvers from '../plugins/register-resolvers.decor';
 import AuthModule from './authentication/auth.module';
-import DummyModule from './dummy/dummy.module';
+import HealthModule from './health/health.module';
 
 const publicEndpoint = process.env.PUBLIC_ENDPOINT || 'public';
 
@@ -21,7 +21,7 @@ const publicRegistrar: FastifyPluginAsync<RegistrarOptions> = async (fastify, op
   });
 
   // register modules
-  fastify.register(DummyModule);
+  fastify.register(HealthModule);
   fastify.register(AuthModule);
 };
 
