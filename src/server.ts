@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 const APP_ENV = process.env.APP_ENV || 'Default';
 
 const server = fastify({
+  connectionTimeout: 10000,
   logger: {
     prettyPrint: {
       colorize: true,
